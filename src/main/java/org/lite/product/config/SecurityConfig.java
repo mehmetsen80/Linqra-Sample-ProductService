@@ -1,5 +1,6 @@
 package org.lite.product.config;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.lite.product.filter.JwtRoleValidationFilter;
 import org.springframework.context.annotation.Bean;
@@ -12,15 +13,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 @Slf4j
 public class SecurityConfig {
 
     //It will be called even though you don't use it here, so don't remove it
     private final JwtRoleValidationFilter jwtRoleValidationFilter;
-
-    public SecurityConfig(JwtRoleValidationFilter jwtRoleValidationFilter) {
-        this.jwtRoleValidationFilter = jwtRoleValidationFilter;
-    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
