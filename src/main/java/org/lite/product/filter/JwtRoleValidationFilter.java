@@ -61,11 +61,11 @@ public class JwtRoleValidationFilter extends OncePerRequestFilter {
             }
         }
 
-        // Check client roles for lite-mesh-gateway-client
+        // Check client roles for linqra-gateway-client
         boolean hasClientRole = false;
         Map<String, Object> resourceAccess = jwt.getClaimAsMap("resource_access");
         if (resourceAccess != null && resourceAccess.containsKey("linqra-gateway-client")) {
-            Map<String, List<String>> clientRoles = (Map<String, List<String>>) resourceAccess.get("linqra-mesh-gateway-client");
+            Map<String, List<String>> clientRoles = (Map<String, List<String>>) resourceAccess.get("linqra-gateway-client");
             if (clientRoles.get("roles").contains("gateway_admin")) {
                 hasClientRole = true;
             }

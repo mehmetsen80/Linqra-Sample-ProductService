@@ -137,6 +137,40 @@ Updates an existing product in the catalog.
 - **Request Body**: A ProductInfo object containing the updated product details
 - **Response**: A ProductAvailabilityResponse containing the updated product
 
+**Sample Request Body:**
+```json
+{
+  "name": "Gaming Laptop Pro",
+  "description": "Updated high-end gaming laptop with RTX 4080 and 32GB RAM",
+  "price": 2699.99,
+  "category": "Electronics"
+}
+```
+
+**Sample Response:**
+```json
+{
+  "products": [
+    {
+      "id": "P004",
+      "name": "Gaming Laptop Pro",
+      "description": "Updated high-end gaming laptop with RTX 4080 and 32GB RAM",
+      "price": 2699.99,
+      "category": "Electronics",
+      "inStock": false,
+      "availableQuantity": null,
+      "estimatedDelivery": null,
+      "warehouseLocation": null
+    }
+  ],
+  "timestamp": "2024-03-19T10:35:22.123Z",
+  "serviceSource": "product-service",
+  "inventoryStatus": null
+}
+```
+
+Note: The `id` in the request body is not required as it's taken from the path parameter `{productId}`. The inventory-related fields will be managed by the inventory service.
+
 ### Delete Product
 
 Removes a product from the catalog.
