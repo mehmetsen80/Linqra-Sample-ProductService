@@ -89,12 +89,12 @@ jobs:
           # Ensure the target directory exists
           ssh $EC2_USERNAME@$EC2_HOST "sudo mkdir -p /var/www/product-service && sudo chown -R $EC2_USERNAME:$EC2_USERNAME /var/www/product-service && sudo chmod -R 755 /var/www/product-service"
           
-          # Rsync main directories (only changed/new files, with sudo on remote)
-          rsync -avz --delete --rsync-path="sudo rsync" artifacts/product-service-source/ $EC2_USERNAME@$EC2_HOST:/var/www/product-service/
+          # Rsync main directories
+          rsync -avz --delete artifacts/product-service-source/ $EC2_USERNAME@$EC2_HOST:/var/www/product-service/
           
-          # Use scp for sensitive or always-fresh files
-          scp -v artifacts/docker-compose/docker-compose.yml $EC2_USERNAME@$EC2_HOST:/var/www/product-service/docker-compose.yml
-          scp -v artifacts/root-pom/pom.xml $EC2_USERNAME@$EC2_HOST:/var/www/product-service/pom.xml
+          # Use rsync for sensitive files
+          rsync -avz artifacts/docker-compose/docker-compose-ec2.yml $EC2_USERNAME@$EC2_HOST:/var/www/product-service/docker-compose.yml
+          rsync -avz artifacts/root-pom/pom.xml $EC2_USERNAME@$EC2_HOST:/var/www/product-service/pom.xml
           
           # .kube and keys (if needed, use scp or rsync as appropriate)
           if [ -d "artifacts/kube-config" ]; then
