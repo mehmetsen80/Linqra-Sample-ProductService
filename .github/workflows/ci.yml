@@ -87,7 +87,7 @@ jobs:
           echo "StrictHostKeyChecking no" >> ~/.ssh/config
           
           # Ensure the target directory exists
-          ssh $EC2_USERNAME@$EC2_HOST "sudo mkdir -p /var/www/product-service"
+          ssh $EC2_USERNAME@$EC2_HOST "sudo mkdir -p /var/www/product-service && sudo chown -R $EC2_USERNAME:$EC2_USERNAME /var/www/product-service && sudo chmod -R 755 /var/www/product-service"
           
           # Rsync main directories (only changed/new files, with sudo on remote)
           rsync -avz --delete --rsync-path="sudo rsync" artifacts/product-service-source/ $EC2_USERNAME@$EC2_HOST:/var/www/product-service/
