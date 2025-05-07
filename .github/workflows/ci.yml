@@ -93,7 +93,7 @@ jobs:
           rsync -avz --delete artifacts/product-service-source/ $EC2_USERNAME@$EC2_HOST:/var/www/product-service/
           
           # Use rsync for sensitive files
-          rsync -avz artifacts/docker-compose/docker-compose-ec2.yml $EC2_USERNAME@$EC2_HOST:/var/www/product-service/docker-compose.yml
+          rsync -avz artifacts/docker-compose/docker-compose.yml $EC2_USERNAME@$EC2_HOST:/var/www/product-service/docker-compose.yml
           rsync -avz artifacts/root-pom/pom.xml $EC2_USERNAME@$EC2_HOST:/var/www/product-service/pom.xml
           
           # .kube and keys (if needed, use scp or rsync as appropriate)
