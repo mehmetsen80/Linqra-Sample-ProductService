@@ -9,8 +9,17 @@ WORKDIR /app
 # Copy the entire project to the Docker container
 COPY . .
 
-# Build only the `product-service` module and package it as a JAR
-RUN mvn clean install
+# Debug: List the source files
+RUN find /app/src -type f -name "*.java"
+
+# Build with debug output
+RUN mvn clean install -X
+
+# Debug: List all compiled classes
+RUN find /app/target -type f -name "*.class"
+
+# Debug: List the contents of the JAR
+RUN jar tf /app/target/ProductService.jar
 
 RUN find /app/target -name "*.class" | grep ProductServiceApplication
 
