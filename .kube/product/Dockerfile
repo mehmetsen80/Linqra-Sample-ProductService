@@ -6,14 +6,19 @@ FROM maven:3.9.8-eclipse-temurin-21-jammy AS build
 # Set the working directory in the build image
 WORKDIR /app
 
+# Debug: List what's being copied
+RUN pwd
+RUN ls -la
+
 # Copy the entire project to the Docker container
 COPY . .
 
-# Debug: List the source files
-RUN find /app/src -type f -name "*.java"
+# Debug: List what was copied
+RUN ls -la
+RUN find . -type f -name "*.java"
 
-# Build with debug output
-RUN mvn clean install -X
+# Build only the `product-service` module and package it as a JAR
+RUN mvn clean install
 
 # Debug: List all compiled classes
 RUN find /app/target -type f -name "*.class"
