@@ -90,7 +90,7 @@ jobs:
           ssh $EC2_USERNAME@$EC2_HOST "sudo mkdir -p /var/www/product-service && sudo chown -R $EC2_USERNAME:$EC2_USERNAME /var/www/product-service && sudo chmod -R 755 /var/www/product-service"
           
           # Rsync main directories
-          rsync -avz --delete artifacts/product-service-source/ $EC2_USERNAME@$EC2_HOST:/var/www/product-service/src/
+          rsync -avz --delete artifacts/product-service-source/ $EC2_USERNAME@$EC2_HOST:/var/www/product-service
           
           # Use rsync for sensitive files
           rsync -avz artifacts/docker-compose/docker-compose.yml $EC2_USERNAME@$EC2_HOST:/var/www/product-service/docker-compose.yml
@@ -113,8 +113,12 @@ jobs:
           
             # Move to the deployment directory
             cd /var/www/product-service
-  
-            # Check disk usage
+          
+          # Prune unused images/containers/volumes/networks
+            echo 'Pruning unused images/containers/volumes/networks'
+            sudo docker system prune -a -f
+          
+          # Check disk usage
             echo 'Checking disk usage'
             df -hT
 
