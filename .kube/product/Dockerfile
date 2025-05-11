@@ -12,6 +12,8 @@ COPY . .
 # Build only the `product-service` module and package it as a JAR
 RUN mvn clean install
 
+RUN ls -ltr /app/target/*.jar
+
 # Stage 2: Create the runtime image with OpenJDK and application JAR
 FROM eclipse-temurin:21-jdk-jammy
 
@@ -23,6 +25,9 @@ WORKDIR /app
 
 # Copy the application JAR from the build image
 COPY --from=build /app/target/ProductService.jar ProductService.jar
+
+RUN ls -ltr /app/ProductService.jar
+RUN jar tf ProductService.jar | grep ProductServiceApplication
 
 # Copy the keystore and truststore files
 COPY keys/product-keystore-container.jks client-keystore.jks
