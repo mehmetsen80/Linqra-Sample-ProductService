@@ -12,7 +12,6 @@ spring:
             allowed-issuers:
               - http://${KEYCLOAK_GATEWAY_URL:localhost}:${KEYCLOAK_GATEWAY_PORT:8281}/realms/Linqra
               - http://localhost:8281/realms/Linqra
-
 server:
   port: 0
   http2:
