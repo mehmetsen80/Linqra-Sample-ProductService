@@ -27,7 +27,7 @@ server:
     trust-store-type: JKS
     client-auth: want
   servlet:
-    context-path: /product-service
+    context-path: /r/product-service
 
 gateway:
   base-url: https://${GATEWAY_SERVICE_URL:localhost}:7777
