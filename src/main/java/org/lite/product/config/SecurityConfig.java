@@ -51,7 +51,7 @@ public class SecurityConfig {
                                 })
                         ))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/product-service/**")  // Update the path to match your actual endpoint
+                        .requestMatchers("/r/product-service/**")  // Update the path to match your actual endpoint
                         .permitAll()
                         .anyRequest()
                         .authenticated()
