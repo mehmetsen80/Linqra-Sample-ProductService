@@ -46,7 +46,7 @@ RUN ls -ltr ProductService.jar
 RUN jar tf ProductService.jar | grep ProductServiceApplication
 
 # Copy the keystore and truststore files
-COPY keys/product-keystore-container.jks client-keystore.jks
+COPY keys/product-service-keystore-container.jks client-keystore.jks
 COPY keys/client-truststore.jks client-truststore.jks
 
 # Set permissions for keystore and truststore files
